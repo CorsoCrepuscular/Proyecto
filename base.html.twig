@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Título página{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+      
+    </head>
+    <body>
+
+        {% block header %}
+            <h1>Margot Pereira - Coaching</h1>
+        {% endblock %}
+        {% block buttons %}
+            
+            <table>
+                <tr>
+                    <td><input type="button" value="">
+                    Inicio</td>
+                    <td>Biografía</td>
+                    <td>Coaching</td>
+                    <td>Servicios</td>
+                    <td>Agenda</td>
+                    <td>Contacto</td>
+                    <td>Blog</td>
+                    <td>Testimonios</td>
+                </tr>
+            </table>
+
+        {% endblock %}
+        {% block body %}{% endblock %}
+        {% block banner %}
+            <p>Banner de publicidad </p>
+        {% endblock %}
+        {% block footer %}
+            <footer>
+                <p>Datos de Margot Pereira (teléfono, whatsapp, dirección, mail) e iconos de acceso a redes sociales.</p>
+            </footer>
+        {% endblock %}
+    </body>
+</html>
