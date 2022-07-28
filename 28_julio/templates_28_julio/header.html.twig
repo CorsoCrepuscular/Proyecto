@@ -1,0 +1,112 @@
+<!--header start-->
+		<section class="header">
+			<div class="container">	
+				<div class="header-left">
+					<ul class="pull-left">
+						<li>
+							<a href="#">
+								<i class="fa fa-phone" aria-hidden="true"></i> +992 563 542
+							</a>
+						</li><!--/li-->
+						<li>
+							<a href="#">
+								<i class="fa fa-envelope" aria-hidden="true"></i>margotpereira@hotmail.com
+							</a>
+						</li><!--/li-->
+					</ul><!--/ul-->
+				</div><!--/.header-left -->
+				<div class="header-right pull-right">
+					<ul>
+						<li class="reg">
+							<a href="#" data-toggle="modal" data-target=".bs-example-modal-sm">
+								Registrarse
+							</a>
+								/
+							<a href="#" data-toggle="modal" data-target=".bs-example-modal-lg">
+								Iniciar sesión
+							</a>
+							
+							<!-- small modal - REGISTRARSE  -->
+							<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+								<div class="modal-dialog modal-sm" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											 <button type="button" class="close" data-dismiss="modal" aria-label="Close" action="{{ path('iniciarSesion') }}">
+											 	<span aria-hidden="true">
+											 		<i class="fa fa-close"></i>
+											 	</span>
+											 </button> 
+											<h4 class="modal-title" id="mySmallModalLabel">
+												Registrarse
+											</h4> 
+											<form class="sm-frm" style="padding:25px" method="POST" action="{{ path('registrarUsuario') }}">
+												<label>Nombre :</label>
+												<input name="nombre" type="text" class="form-control" placeholder="Nombre">
+												<label>Email :</label>
+												<input name="email" type="text" class="form-control" placeholder="Email">
+												<label>Contraseña :</label>
+												<input name="keyword" type="text" class="form-control" placeholder="Contraseña">
+												<label><input type="checkbox" nombre="personality"> Recordar </label>
+												
+												<button type="submit" class="btn btn-default pull-right"> Enviar </button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<!-- large modal -INICIAR SESIÓN-->
+							<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+								<div class="modal-dialog modal-lg" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											 	<span aria-hidden="true">
+											 		<i class="fa fa-close"></i>
+											 	</span>
+											</button>  
+											<h4 class="modal-title" id="myLargeModalLabel">
+												Iniciar sesión
+											</h4> 
+                                           
+											<form method="POST" class="lg-frm" style="padding:25px" action="{{ path('iniciarSesion') }}">
+												<label>Nombre :</label>
+												<input name="nombre" type="text" class="form-control" placeholder="Nombre">
+												<label>Email :</label>
+												<input name="email" type="text" class="form-control" placeholder="Email">
+												<label>Contraseña :</label>
+												<input name="keyword" type="text" class="form-control" placeholder="Contraseña">
+												<button type="submit" class="btn btn-default pull-right">Enviar</button>                                            											
+											
+											{% if usuario is defined %}
+												{{ usuario.keyword }}
+											{% endif %}											
+											
+											{% if mensaje is defined %}
+												{{ mensaje }}    
+											{% endif %}
+
+											</form>
+											
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</li><!--/li -->
+						<li>
+							<div class="social-icon">
+								<ul>
+									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+									<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								</ul><!--/.ul -->
+							</div><!--/.social-icon -->
+						</li><!--/li -->
+					</ul><!--/ul -->
+				</div><!--/.header-right -->
+			</div><!--/.container -->	
+
+		</section><!--/.header-->	
+		<!--header end-->
