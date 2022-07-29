@@ -1,0 +1,361 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 29-07-2022 a las 13:07:11
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `coachingdb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `admin`
+--
+
+CREATE TABLE `admin` (
+  `mail` varchar(40) NOT NULL,
+  `keyword` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `carro`
+--
+
+CREATE TABLE `carro` (
+  `id_carro` int(11) NOT NULL,
+  `servicio` varchar(45) NOT NULL,
+  `importe` int(11) DEFAULT NULL,
+  `facturas_numero_factura` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clientes`
+--
+
+CREATE TABLE `clientes` (
+  `id_cliente` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `apellidos` varchar(45) NOT NULL,
+  `calle` varchar(45) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `localidad` varchar(45) NOT NULL,
+  `provincia` varchar(45) NOT NULL,
+  `pais` varchar(45) NOT NULL,
+  `telefono` int(11) NOT NULL,
+  `mail` varchar(45) NOT NULL,
+  `carro_id_carro` int(11) NOT NULL,
+  `historial_id_historial` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comentarios`
+--
+
+CREATE TABLE `comentarios` (
+  `id_comentario` int(11) NOT NULL,
+  `autor` varchar(45) NOT NULL,
+  `body` text NOT NULL,
+  `posts_id_post` int(11) NOT NULL,
+  `posts_admin_nombre` varchar(10) NOT NULL,
+  `clientes_id_cliente` int(11) NOT NULL,
+  `clientes_carro_id_carro` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `facturas`
+--
+
+CREATE TABLE `facturas` (
+  `numero_factura` int(11) NOT NULL,
+  `concepto` varchar(45) NOT NULL,
+  `numero cuenta` varchar(45) NOT NULL,
+  `importe` int(11) NOT NULL,
+  `calle` varchar(45) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `localidad` varchar(45) NOT NULL,
+  `provincia` varchar(45) NOT NULL,
+  `pais` varchar(45) NOT NULL,
+  `nif` varchar(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historial`
+--
+
+CREATE TABLE `historial` (
+  `id_historial` int(11) NOT NULL,
+  `servicio` varchar(45) NOT NULL,
+  `fecha` date NOT NULL,
+  `importe` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `modo_pago`
+--
+
+CREATE TABLE `modo_pago` (
+  `id_modo` int(11) NOT NULL,
+  `tipo` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pagos`
+--
+
+CREATE TABLE `pagos` (
+  `id_pago` int(11) NOT NULL,
+  `modo_pago_id_modo` int(11) NOT NULL,
+  `facturas_numero_factura` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `posts`
+--
+
+CREATE TABLE `posts` (
+  `id_post` int(11) NOT NULL,
+  `url` varchar(45) DEFAULT NULL,
+  `titulo` varchar(45) NOT NULL,
+  `body` text NOT NULL,
+  `admin_nombre` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `roles`
+--
+
+CREATE TABLE `roles` (
+  `id_rol` varchar(1) NOT NULL,
+  `tipo` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `servicios`
+--
+
+CREATE TABLE `servicios` (
+  `id_servicio` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `descripcion` varchar(70) NOT NULL,
+  `precio` int(11) NOT NULL,
+  `admin_nombre` varchar(10) NOT NULL,
+  `pagos_id_pago` int(11) NOT NULL,
+  `clientes_id_cliente` int(11) NOT NULL,
+  `clientes_carro_id_carro` int(11) NOT NULL,
+  `tipo` varchar(1) NOT NULL,
+  `sesiones_id_evento` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sesiones`
+--
+
+CREATE TABLE `sesiones` (
+  `id_evento` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL,
+  `lugar` varchar(45) NOT NULL,
+  `horario` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `mail` varchar(40) NOT NULL,
+  `keyword` varchar(10) DEFAULT NULL,
+  `roles_id_rol` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`mail`);
+
+--
+-- Indices de la tabla `carro`
+--
+ALTER TABLE `carro`
+  ADD PRIMARY KEY (`id_carro`,`facturas_numero_factura`),
+  ADD KEY `fk_carro_facturas1` (`facturas_numero_factura`);
+
+--
+-- Indices de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`id_cliente`),
+  ADD KEY `fk_clientes_carro1` (`carro_id_carro`),
+  ADD KEY `fk_clientes_historial1` (`historial_id_historial`);
+
+--
+-- Indices de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id_comentario`),
+  ADD KEY `fk_comentarios_posts1` (`posts_id_post`),
+  ADD KEY `fk_comentarios_clientes1` (`clientes_id_cliente`);
+
+--
+-- Indices de la tabla `facturas`
+--
+ALTER TABLE `facturas`
+  ADD PRIMARY KEY (`numero_factura`);
+
+--
+-- Indices de la tabla `historial`
+--
+ALTER TABLE `historial`
+  ADD PRIMARY KEY (`id_historial`);
+
+--
+-- Indices de la tabla `modo_pago`
+--
+ALTER TABLE `modo_pago`
+  ADD PRIMARY KEY (`id_modo`);
+
+--
+-- Indices de la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  ADD PRIMARY KEY (`id_pago`),
+  ADD KEY `fk_pagos_modo_pago1` (`modo_pago_id_modo`),
+  ADD KEY `fk_pagos_facturas1` (`facturas_numero_factura`);
+
+--
+-- Indices de la tabla `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id_post`,`admin_nombre`),
+  ADD KEY `fk_posts_admin1` (`admin_nombre`);
+
+--
+-- Indices de la tabla `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id_rol`);
+
+--
+-- Indices de la tabla `servicios`
+--
+ALTER TABLE `servicios`
+  ADD PRIMARY KEY (`id_servicio`),
+  ADD KEY `fk_servicios_admin1` (`admin_nombre`),
+  ADD KEY `fk_servicios_pagos1` (`pagos_id_pago`),
+  ADD KEY `fk_servicios_clientes1` (`clientes_id_cliente`),
+  ADD KEY `fk_servicios_sesiones1` (`sesiones_id_evento`);
+
+--
+-- Indices de la tabla `sesiones`
+--
+ALTER TABLE `sesiones`
+  ADD PRIMARY KEY (`id_evento`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`mail`),
+  ADD KEY `fk_usuarios_roles` (`roles_id_rol`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `carro`
+--
+ALTER TABLE `carro`
+  ADD CONSTRAINT `fk_carro_facturas1` FOREIGN KEY (`facturas_numero_factura`) REFERENCES `facturas` (`numero_factura`);
+
+--
+-- Filtros para la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD CONSTRAINT `fk_clientes_carro1` FOREIGN KEY (`carro_id_carro`) REFERENCES `carro` (`id_carro`),
+  ADD CONSTRAINT `fk_clientes_historial1` FOREIGN KEY (`historial_id_historial`) REFERENCES `historial` (`id_historial`);
+
+--
+-- Filtros para la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD CONSTRAINT `fk_comentarios_clientes1` FOREIGN KEY (`clientes_id_cliente`) REFERENCES `clientes` (`id_cliente`),
+  ADD CONSTRAINT `fk_comentarios_posts1` FOREIGN KEY (`posts_id_post`) REFERENCES `posts` (`id_post`);
+
+--
+-- Filtros para la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  ADD CONSTRAINT `fk_pagos_facturas1` FOREIGN KEY (`facturas_numero_factura`) REFERENCES `facturas` (`numero_factura`),
+  ADD CONSTRAINT `fk_pagos_modo_pago1` FOREIGN KEY (`modo_pago_id_modo`) REFERENCES `modo_pago` (`id_modo`);
+
+--
+-- Filtros para la tabla `posts`
+--
+ALTER TABLE `posts`
+  ADD CONSTRAINT `fk_posts_admin1` FOREIGN KEY (`admin_nombre`) REFERENCES `admin` (`mail`);
+
+--
+-- Filtros para la tabla `servicios`
+--
+ALTER TABLE `servicios`
+  ADD CONSTRAINT `fk_servicios_admin1` FOREIGN KEY (`admin_nombre`) REFERENCES `admin` (`mail`),
+  ADD CONSTRAINT `fk_servicios_clientes1` FOREIGN KEY (`clientes_id_cliente`) REFERENCES `clientes` (`id_cliente`),
+  ADD CONSTRAINT `fk_servicios_pagos1` FOREIGN KEY (`pagos_id_pago`) REFERENCES `pagos` (`id_pago`),
+  ADD CONSTRAINT `fk_servicios_sesiones1` FOREIGN KEY (`sesiones_id_evento`) REFERENCES `sesiones` (`id_evento`);
+
+--
+-- Filtros para la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `fk_usuarios_roles` FOREIGN KEY (`roles_id_rol`) REFERENCES `roles` (`id_rol`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
